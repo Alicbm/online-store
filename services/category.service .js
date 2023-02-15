@@ -35,7 +35,7 @@ class CategoryServices {
 
   async findOne(id){
     const index = this.categories.findIndex(item => item.id == id)
-    console.log(index);
+
     if(index == -1){
       throw boom.notFound('Product not found')
     }

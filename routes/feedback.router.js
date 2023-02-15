@@ -1,21 +1,19 @@
 const express = require('express');
-const CategoryServices = require('../services/category.service ');
+const FeedbackServices = require('../services/feedback.service');
 
 const router = express.Router();
-const service = new CategoryServices();
+const service = new FeedbackServices();
 
 const {
-  getCategorySchema,
-  createCategorySchema,
-  updateCategorySchema
-} = require('../schemas/category.schema')
+  getFeedbackSchema, createFeedbackSchema, updateFeedbackSchema
+} = require('../schemas/feedback.schema')
 
 const validatorHandler = require('../middlewares/validator.handler')
 
 router.get('/', async (req, res) => {
   try {
-    const category = await service.generate();
-    res.json(category)
+    const feedback = await service.generate();
+    res.json(feedback)
   } catch (err) {
     res.status(404).json({
       message: err.message
@@ -24,12 +22,12 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/:id',
-  validatorHandler(getCategorySchema, 'params'),
+  validatorHandler(getFeedbackSchema, 'params'),
   async (req, res, next) => {
     try {
       const { id } = req.params;
-      const category = await service.findOne(id);
-      res.json(category)
+      const feedback = await service.findOne(id);
+      res.json(feedback)
 
     } catch (err) {
       next(err)
@@ -37,12 +35,12 @@ router.get('/:id',
   })
 
 router.post('/',
-  validatorHandler(createCategorySchema, 'body'),
+  validatorHandler(createFeedbackSchema, 'body'),
   async (req, res, next) => {
     try {
       const body = req.body;
-      const category = await service.create(body);
-      res.json(category)
+      const feedback = await service.create(body);
+      res.json(feedback)
 
     } catch (err) {
       next(err)
@@ -50,14 +48,14 @@ router.post('/',
   })
 
 router.patch('/:id',
-  validatorHandler(updateCategorySchema, 'params'),
+  validatorHandler(updateFeedbackSchema, 'params'),
   async (req, res, next) => {
     try {
       const { id } = req.params;
       const body = req.body;
-      const category = await service.update(id, body);
+      const feedback = await service.update(id, body);
 
-      res.json(category)
+      res.json(feedback)
 
     } catch (err) {
       next(err)
@@ -67,9 +65,9 @@ router.patch('/:id',
 router.delete('/:id', async (req, res, next) => {
   try {
     const { id } = req.params;
-    const category = await service.delete(id);
+    const feedback = await service.delete(id);
 
-    res.json(category)
+    res.json(feedback)
 
   } catch (err) {
     next(err)
