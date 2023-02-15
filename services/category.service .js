@@ -1,5 +1,7 @@
 const boom = require('@hapi/boom')
 
+const sequelize = require('../libs/sequelize')
+
 class CategoryServices { 
 
   constructor(){
@@ -18,8 +20,9 @@ class CategoryServices {
   }
 
   async generate(){
-    const rta = this.categories;
-    return rta;
+    const query = 'select * from categories'
+    const [data] = await sequelize.query(query);
+    return data;
   }
 
   async create(body){
