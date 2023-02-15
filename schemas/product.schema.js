@@ -7,7 +7,7 @@ const description = Joi.string().min(10)
 const image = Joi.string()
 const favorite = Joi.boolean()
 const createAt = Joi.string();
-const categoryId = Joi.number().integer()
+// const categoryId = Joi.number().integer()
 
 const getProductSchema = Joi.object({
   id: id.required()
@@ -21,7 +21,7 @@ const createProductSchema = Joi.object({
   image: image.required(),
   favorite: favorite.required(),
   createAt: createAt.required(),
-  categoryId: categoryId.required(),
+  // categoryId: categoryId.required(),
 })
 
 const updateProductSchema = Joi.object({
@@ -31,7 +31,7 @@ const updateProductSchema = Joi.object({
   image: image.optional(),
   favorite: favorite.optional(),
   createAt: createAt.optional(),
-  categoryId: categoryId.optional(),
+  // categoryId: categoryId.optional(),
 })
 
 module.exports = {getProductSchema, createProductSchema, updateProductSchema}
