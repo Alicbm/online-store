@@ -1,79 +1,51 @@
 const boom = require('@hapi/boom')
 
-const sequelize = require('../libs/sequelize')
+const { models } = require('../libs/sequelize')
 
 class ProductServices { 
 
-  constructor(){
-    this.products = [
-      {
-        id: 1,
-        name: 'product 1',
-        price: 1000,
-        image: 'https://alicbm.com',
-        createAt: '2023-02-10',
-        categoryId: 1
-      },
-      {
-        id: 2,
-        name: 'product 2',
-        price: 2000,
-        image: 'https://alicbm.com',
-        createAt: '2023-02-10',
-        categoryId: 2
-      }
-    ]
+  constructor(){}
+
+  async generate() {
+    const rta = await models.Category.findAll();
+    return rta;
   }
 
-  async generate(){
-    const query = 'select * from products'
-    const [data] = await sequelize.query(query);
-    return data;
-  }
-
-  async create(body){
-    if(!body){
+  async create(body) {
+    if (!body) {
       throw boom.notFound('Product not found')
     }
-    const newProduct = {
-      ...body
-    }
-    this.products.push(newProduct)
-    return newProduct
+    const rta = await models.Category.create(body);
+    return rta;
   }
 
-  async findOne(id){
-    const index = this.products.findIndex(item => item.id == id)
-    if(index == -1){
+  async findOne(id) {
+    const rta = await models.Category.findByPk(id);
+    if (!rta) {
       throw boom.notFound('Product not found')
     }
-    return this.products[index];
+    return rta;
   }
 
-  async update(id, body){
-    const index = this.products.findIndex(item => item.id == id)
-    if(index == -1){
+  async update(id, body) {
+    const element = await models.Category.findByPk(id);
+    
+    if (!element) {
       throw boom.notFound('Product not found')
     }
-    this.products[index] = {
-      ... this.products[index],
-      ...body,
-    };
-    return{
-      ...this.products[index]
-    }
+    const rta = await element.update(body)
+    return rta;
 
   }
 
-  async delete(id){
-    const index = this.products.findIndex(item => item.id == id)
-    if(index == -1){
+  async delete(id) {
+    const element = await models.Category.findByPk(id);
+    if (!element) {
       throw boom.notFound('Product not found')
     }
-    this.products.splice(index, 1)
-    return {
-      id,
-    };
+    await element.destroy()
+
+    return id
   }
 
 }

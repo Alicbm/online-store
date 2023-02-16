@@ -1,74 +1,51 @@
 const boom = require('@hapi/boom')
 
-const sequelize = require('../libs/sequelize')
+const { models } = require('../libs/sequelize')
 
-class CategoryServices { 
+class CategoryServices {
 
-  constructor(){
-    this.categories = [
-      {
-        id: 1,
-        name: 'category 1',
-        createAt: '2023-02-10',
-      },
-      {
-        id: 2,
-        name: 'category 2',
-        createAt: '2023-02-10',
-      }
-    ]
+  constructor() {}
+
+  async generate() {
+    const rta = await models.Category.findAll();
+    return rta;
   }
 
-  async generate(){
-    const query = 'select * from categories'
-    const [data] = await sequelize.query(query);
-    return data;
-  }
-
-  async create(body){
-    if(!body){
+  async create(body) {
+    if (!body) {
       throw boom.notFound('Product not found')
     }
-    const newProduct = {
-      ...body
-    }
-    this.categories.push(newProduct)
-    return newProduct
+    const rta = await models.Category.create(body);
+    return rta;
   }
 
-  async findOne(id){
-    const index = this.categories.findIndex(item => item.id == id)
-
-    if(index == -1){
+  async findOne(id) {
+    const rta = await models.Category.findByPk(id);
+    if (!rta) {
       throw boom.notFound('Product not found')
     }
-    return this.categories[index];
+    return rta;
   }
 
-  async update(id, body){
-    const index = this.categories.findIndex(item => item.id == id)
-    if(index == -1){
+  async update(id, body) {
+    const element = await models.Category.findByPk(id);
+    
+    if (!element) {
       throw boom.notFound('Product not found')
     }
-    this.categories[index] = {
-      ... this.categories[index],
-      ...body,
-    };
-    return{
-      ...this.categories[index]
-    }
+    const rta = await element.update(body)
+    return rta;
 
   }
 
-  async delete(id){
-    const index = this.categories.findIndex(item => item.id == id)
-    if(index == -1){
+  async delete(id) {
+    const element = await models.Category.findByPk(id);
+    if (!element) {
       throw boom.notFound('Product not found')
     }
-    this.categories.splice(index, 1)
-    return {
-      id,
-    };
+    await element.destroy()
+
+    return id
   }
 
 }
