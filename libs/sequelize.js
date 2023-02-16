@@ -1,12 +1,8 @@
 const { Sequelize } = require('sequelize');
 
-const { config } = require('../config/config')
 const setupModels = require('../db/models')
 
-const USER = encodeURIComponent(config.dbUser)
-const PASSWORD = encodeURIComponent(config.dbPassword)
-
-const URI = `mysql://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${config.dbName}`
+const URI = 'mysql://root:TKQWmN2byhdedA0CRo5k@containers-us-west-23.railway.app:6970/railway'
 
 const sequelize = new Sequelize(URI, {
   dialect: 'mysql',
