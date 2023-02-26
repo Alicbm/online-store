@@ -9,19 +9,22 @@ const validatorHandler = require('../middlewares/validator.handler')
 const {
   getProductSchema,
   createProductSchema,
-  updateProductSchema
+  updateProductSchema,
+  queryProductSchema
 } = require('../schemas/product.schema')
 
-router.get('/', async (req, res) => {
-  try {
-    const product = await service.generate();
-    res.json(product)
-  } catch (err) {
-    res.status(404).json({
-      message: err.message
-    })
-  }
-})
+router.get('/',
+  validatorHandler(queryProductSchema, 'query'),
+  async (req, res) => {
+    try {
+      const product = await service.generate(req.query);
+      res.json(product)
+    } catch (err) {
+      res.status(404).json({
+        message: err.message
+      })
+    }
+  })
 
 router.get('/:id',
   validatorHandler(getProductSchema, 'params'),
@@ -45,7 +48,6 @@ router.post('/',
       const body = req.body;
       const product = await service.create(body);
       res.json(product)
-
     } catch (err) {
       return {
         message: err.message

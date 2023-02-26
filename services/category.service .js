@@ -7,7 +7,9 @@ class CategoryServices {
   constructor() {}
 
   async generate() {
-    const rta = await models.Category.findAll();
+    const rta = await models.Category.findAll({
+      include: ['products']
+    });
     return rta;
   }
 

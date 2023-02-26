@@ -7,7 +7,7 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json())
 
-app.get('/', (req, res) => {
+app.get('/api/v1/', (req, res) => {
   res.json({
     message: 'Hello alic'
   })
