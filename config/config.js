@@ -3,11 +3,11 @@ require('dotenv').config();
 const config = {
   env: process.env.NODE_ENV || 'dev',
   port: process.env.PORT || 3000,
-  dbUser: process.env.DB_USER || 'root',
-  dbPassword: process.env.DB_PASSWORD || 'barandica123',
-  dbHost: process.env.DB_HOST || 'localhost',
-  dbName: process.env.DB_NAME || 'my_store',
-  dbPort: process.env.DB_PORT || '3307',
+  dbUser:'4bvrkih1x1sf72xw97ac',
+  dbPassword:'pscale_pw_l7d9Sujcx67kRXQXYRypJyj0NqLn8hhU5tvudG3oEpa',
+  dbHost:'us-east.connect.psdb.cloud',
+  dbName:'online-store-db',
+  dbPort:'3307'
 }
 
 module.exports = { config }
