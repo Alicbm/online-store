@@ -54,12 +54,12 @@ class ProductServices {
 
   async update(id, body) {
     const element = await models.Product.findByPk(id);
-    
-    if (!element) {
-      throw boom.notFound('Product not found')
-    }
     const rta = await element.update(body)
     return rta;
+    
+    // if (!element) {
+    //   throw boom.notFound('Product not found')
+    // }
 
   }
 
