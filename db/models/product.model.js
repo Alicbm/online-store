@@ -37,6 +37,10 @@ const ProductSchema = {
     type: DataTypes.BOOLEAN,
     defaultValue: false,
   },
+  product: {
+    allowNull: false,
+    type: DataTypes.STRING,
+  },
   createAt: {
     allowNull: false,
     type: DataTypes.STRING,

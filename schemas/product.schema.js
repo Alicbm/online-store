@@ -10,6 +10,7 @@ const image = Joi.string()
 const favorite = Joi.boolean()
 const createAt = Joi.string();
 const brand = Joi.string();
+const product = Joi.string();
 const categoryId = Joi.number().integer()
 
 const limit = Joi.number().integer()
@@ -27,6 +28,7 @@ const createProductSchema = Joi.object({
   description: description.required(),
   image: image.required(),
   favorite: favorite.required(),
+  product: product.required(),
   createAt: createAt.required(),
   categoryId: categoryId.required(),
 })
@@ -38,6 +40,7 @@ const updateProductSchema = Joi.object({
   description: description.optional(),
   image: image.optional(),
   favorite: favorite.optional(),
+  product: product.optional(),
   createAt: createAt.optional(),
   categoryId: categoryId.optional(),
 })
