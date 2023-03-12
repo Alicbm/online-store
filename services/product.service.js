@@ -9,7 +9,7 @@ class ProductServices {
 
   async generate(query) {
     const options = {
-      include: ['category'],
+      include: ['category', 'feedback'],
       where: {}
     }
 
