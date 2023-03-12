@@ -7,7 +7,9 @@ class FeedbackServices {
   constructor(){}
 
   async generate(){
-    const rta = await models.Category.findAll();
+    const rta = await models.Feedback.findAll({
+      include: ['product']
+    });
     return rta;  
   }
 
@@ -15,12 +17,12 @@ class FeedbackServices {
     if (!body) {
       throw boom.notFound('Product not found')
     }
-    const rta = await models.Category.create(body);
+    const rta = await models.Feedback.create(body);
     return rta;
   }
 
   async findOne(id) {
-    const rta = await models.Category.findByPk(id);
+    const rta = await models.Feedback.findByPk(id);
     if (!rta) {
       throw boom.notFound('Product not found')
     }
@@ -28,7 +30,7 @@ class FeedbackServices {
   }
 
   async update(id, body) {
-    const element = await models.Category.findByPk(id);
+    const element = await models.Feedback.findByPk(id);
     
     if (!element) {
       throw boom.notFound('Product not found')
@@ -39,7 +41,7 @@ class FeedbackServices {
   }
 
   async delete(id) {
-    const element = await models.Category.findByPk(id);
+    const element = await models.Feedback.findByPk(id);
     if (!element) {
       throw boom.notFound('Product not found')
     }

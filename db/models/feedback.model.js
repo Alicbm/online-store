@@ -42,7 +42,7 @@ const FeedbackSchema = {
     defaultValue: Sequelize.NOW
   },
   productId: {
-    field: 'product_id',
+    field: 'productId',
     allowNull: true,
     type: DataTypes.INTEGER,
     references: {
