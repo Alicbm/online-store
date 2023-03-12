@@ -45,7 +45,9 @@ class ProductServices {
   }
 
   async findOne(id) {
-    const rta = await models.Product.findByPk(id);
+    const rta = await models.Product.findByPk(id, {
+      include: ['category', 'feedback']
+    });
     if (!rta) {
       throw boom.notFound('Product not found')
     }
