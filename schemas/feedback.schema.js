@@ -2,9 +2,9 @@ const Joi = require('joi')
 
 const id = Joi.number().integer();
 const name = Joi.string();
-const bad = Joi.string();
-const regular = Joi.string();
-const good = Joi.string();
+const bad = Joi.boolean();
+const regular = Joi.boolean();
+const good = Joi.boolean();
 const createAt = Joi.string();
 const description = Joi.string();
 const productId = Joi.number().integer();
