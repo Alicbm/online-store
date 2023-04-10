@@ -13,7 +13,13 @@ app.use(cors());
 
 app.get('/api/v1/', (req, res) => {
   res.json({
-    message: 'Hello alic'
+    Hello: 'Hello, welcome to this API',
+    name: "My name is Alic Barandica, I created this project",
+    routes: {
+      products: '.../products',
+      categories: '.../categories',
+      feedback: '.../feedback',
+    }
   })
 })
 
